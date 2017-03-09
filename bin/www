@@ -1,0 +1,127 @@
+#!/usr/bin/env node
+import http from 'http';
+import Debug from 'debug';
+const debug = new Debug('demo:server');
+
+/**
+ * Created by Atlantismonk on 2017/2/25.
+ */
+import _args from '../configs'
+_args.isDebug = process.env.NODE_ENV === 'debug';
+_args.isDev = (!process.env.NODE_ENV? 'development':(process.env.NODE_ENV === 'development'));
+_args.isTest = process.env.NODE_ENV === 'test';
+_args.isProduction = process.env.NODE_ENV === 'production';
+global._args = _args;//导入全局变量
+console.log('process.env.NODE_ENV=' + process.env.NODE_ENV);
+
+import logConfig from '../configs/log.config';
+import {confirmPath} from '../utils';
+
+
+
+/**
+ * 初始化log相关目录
+ */
+(function(){
+    //创建log的根目录'logs'
+    if(logConfig.baseLogPath){
+        confirmPath(logConfig.baseLogPath)
+        //根据不同的logType创建不同的文件目录
+        for(let i = 0, len = logConfig.appenders.length; i < len; i++){
+            if(logConfig.appenders[i].path){
+                confirmPath(logConfig.baseLogPath + logConfig.appenders[i].path);
+            }
+        }
+    }
+})();
+
+
+
+//运行连接mongo代码
+import mongo from './mongo';
+mongo();
+
+
+
+/**
+ * 项目入口
+ */
+import app from '../app';
+// 打印输出端口号
+// 将端口号设置为配置文件的端口号，默认值为3000
+var port = normalizePort(_args.port || '3000');
+console.log('port = ' + port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app.callback());
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+}

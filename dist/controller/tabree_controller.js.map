@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../controller/tabree_controller.js"],"names":[],"mappings":";;AAAA","file":"tabree_controller.js","sourcesContent":["import {Tabree} from '../models';\r\n\r\n/**\r\n * Created by Atlantismonk on 2017/3/6.\r\n */\r\n"]}

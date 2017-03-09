@@ -1,0 +1,7 @@
+{
+  "token_key":"bixuwei16weizifu",
+  "port": 3000,
+  "mongodb_url": "mongodb://localhost/test",
+  "redis_url": "",
+  "redis_port": ""
+}

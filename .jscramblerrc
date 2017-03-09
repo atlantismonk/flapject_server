@@ -1,0 +1,22 @@
+{
+  "keys": {
+    "accessKey": "See https://jscrambler.com/en/account/api_access",
+    "secretKey": "See https://jscrambler.com/en/account/api_access"
+  },
+  "params": {
+    "constant_folding": "%DEFAULT%",
+    "dead_code": "%DEFAULT%",
+    "dead_code_elimination": "%DEFAULT%",
+    "dictionary_compression": "%DEFAULT%",
+    "dot_notation_elimination": "%DEFAULT%",
+    "function_outlining": "%DEFAULT%",
+    "function-reorder": "%DEFAULT%",
+    "literal_duplicates": "%DEFAULT%",
+    "literal_hooking": "2;8",
+    "member_enumeration": "%DEFAULT%",
+    "mode": "nodejs",
+    "rename_local": "%DEFAULT%",
+    "string_splitting":"0.3",
+    "whitespace": "%DEFAULT%"
+  }
+}
