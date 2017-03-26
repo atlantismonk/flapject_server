@@ -5,7 +5,8 @@
 import Router from 'koa-router';
 import async from 'async';
 
-import post_controller from '../controller/post_controller';
+import Post from '../controller/post_controller';
+const post_controller = Post();
 
 const router = new Router({
     prefix:'/posts'

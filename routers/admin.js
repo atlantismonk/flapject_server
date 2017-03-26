@@ -3,8 +3,8 @@
  * 管理员
  */
 import Router from 'koa-router'
-import admin_controller from '../controller/admin_controller'
-
+import Admin from '../controller/admin_controller'
+const admin_controller = Admin();
 
 /**
  * 管理业务路由

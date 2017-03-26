@@ -108,3 +108,11 @@ class TabreeController{
         });
     }
 }
+
+let tabree;
+export default function () {
+    if (!tabree)
+        tabree = new TabreeController();
+
+    return tabree;
+};

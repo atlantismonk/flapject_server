@@ -13,7 +13,7 @@ class AdminController {
      */
     async show(ctx, next) {
         //todo 把fetch()换成findOne()
-        await Config.fetch(function (err, configs) {
+        Config.fetch(function (err, configs) {
             if (err) ctx.throw(err);
             ctx.body = configs;
         });
@@ -226,8 +226,10 @@ class AdminController {
     }
 }
 
-export default (function () {
-    if (!admin)const admin = new AdminController();
+let admin;
+export default function () {
+    if (!admin)
+        admin = new AdminController();
 
     return admin;
-});
+};

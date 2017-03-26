@@ -3,7 +3,8 @@
  */
 import Router from 'koa-router';
 
-import tabtree_controller from '../controller/tabree_controller';
+import Tabree from '../controller/tabree_controller';
+const tabtree_controller = Tabree();
 
 const router = new Router({
     prefix: '/tabree'

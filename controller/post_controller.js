@@ -6,6 +6,9 @@ import {Post} from '../models';
 
 
 class PostController{
+    constructor(){
+
+    }
 
     /**
      * 获取所有文章
@@ -128,9 +131,10 @@ class PostController{
 
 }
 
-
-export default (function () {
-    if (!post)const post = new PostController();
+let post;
+export default function () {
+    if (!post)
+        post = new PostController();
 
     return post;
-});
+};
